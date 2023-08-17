@@ -1,0 +1,62 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "imgUser": "./src/assets/AnaBanana.png",
+      "name": "Ana Banana",
+      "qtsPubs": 9,
+      "followers": 700
+    },
+    {
+      "id": "2",
+      "imgUser": "./src/assets/JoaoLeitao.png",
+      "name": "João Leitão",
+      "qtsPubs": 12,
+      "followers": 502
+    },
+    {
+      "id": "3",
+      "imgUser": "./src/assets/Pafuncio.png",
+      "name": "Pafuncio",
+      "qtsPubs": 20,
+      "followers": 300
+    },
+    {
+      "id": "4",
+      "imgUser": "./src/assets/VeraVassoura.png",
+      "name": "Vera Vassoura",
+      "qtsPubs": 3,
+      "followers": 90
+    }
+  ],
+  "pubs": [
+    {
+      "idUser": "3",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    },
+    {
+      "idUser": "2",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    },
+    {
+      "idUser": "4",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    },
+    {
+      "idUser": "3",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    },
+    {
+      "idUser": "3",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    },
+    {
+      "idUser": "4",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    },
+    {
+      "idUser": "2",
+      "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+    }
+  ]
+}

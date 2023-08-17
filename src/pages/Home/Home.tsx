@@ -3,8 +3,19 @@ import logo from '../../assets/logo.png';
 import { MainHome } from './styles';
 import Publicacao from '../../components/Publicacao';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
+import imgUser from '../../assets/AnaBanana.png'
 
 export function Home(){
+    const usuarioLogado = {
+        id: 1,
+        imgUser: imgUser,
+        name: 'Ana Banana',
+        qtsPubs: 9,
+        followers: 700
+    }
+
     return (
         <MainHome>
             <aside>
@@ -13,7 +24,7 @@ export function Home(){
                 </Link>                
 
                 <Link className='link perfil' to='/perfil'>
-                    <img src="https://diariodocomercio.com.br/wp-content/uploads/2022/08/mulher-na-politica-eleicoes.jpg" alt="imagem do perfil do usuário" />
+                    <img src={usuarioLogado.imgUser} alt="imagem do perfil do usuário" />
                     <span>Perfil</span>
                 </Link>
 
@@ -25,7 +36,7 @@ export function Home(){
 
             <section className='container-pub'>
                 <div className='nova-pub'>
-                    <img src="https://diariodocomercio.com.br/wp-content/uploads/2022/08/mulher-na-politica-eleicoes.jpg" alt="imagem do perfil do usuário" />
+                    <img src={usuarioLogado.imgUser} alt="imagem do perfil do usuário" />
                     
                     <div>
                         <textarea cols={30} rows={4} placeholder='Escrever nova publicação...'></textarea>
