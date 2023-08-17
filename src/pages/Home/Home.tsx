@@ -1,65 +1,82 @@
-import { UserCircleGear } from '@phosphor-icons/react';
-import logo from '../../assets/logo.png';
-import { MainHome } from './styles';
-import Publicacao from '../../components/Publicacao';
-import { Link } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
-import { UserContext } from '../../context/UserContext';
-import { PubContext } from '../../context/PubContext';
+import { UserCircleGear } from "@phosphor-icons/react";
+import logo from "../../assets/logo.png";
+import { MainHome } from "./styles";
+import Publicacao from "../../components/Publicacao";
+import { Link } from "react-router-dom";
+import { ChangeEvent, useContext, useState } from "react";
+import { UserContext } from "../../context/UserContext";
+import { PubContext } from "../../context/PubContext";
 
-export function Home(){    
-    const { userData, userLogado } = useContext(UserContext);
-    const { pubData } = useContext(PubContext);
+export function Home() {
+  const { userData, userLogado } = useContext(UserContext);
+  const { pubData, addPub } = useContext(PubContext);
 
-    return (
-        <MainHome>
-            <aside>
-                <Link className='link' to='/'>
-                    <img className='logo' src={logo} alt="logo da Y" />
-                </Link>                
+  const [textNewPub, setTextNewPub] = useState<string>("");
 
-                <Link className='link perfil' to='/perfil'>
-                    <img src={userLogado.imgUser} alt="imagem do perfil do usuário" />
-                    <span>Perfil</span>
-                </Link>
+  const handleTextareaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setTextNewPub(event.target.value);
+  };
 
-                <Link className='link preferencias' to='/preferencias'>
-                    <UserCircleGear size={72} weight="light" />
-                    <span>Preferências</span>
-                </Link>
-            </aside>
+  const handlePublish = () => {
+    if(textNewPub != ''){
+        addPub(userLogado.id, textNewPub);
+    }    
+  }
 
-            <section className='container-pub'>
-                <div className='nova-pub'>
-                    <img src={userLogado.imgUser} alt="imagem do perfil do usuário" />
-                    
-                    <div>
-                        <textarea cols={30} rows={4} placeholder='Escrever nova publicação...'></textarea>
-                        <button>Publicar</button>
-                    </div>
-                </div>
+  return (
+    <MainHome>
+      <aside>
+        <Link className="link" to="/">
+          <img className="logo" src={logo} alt="logo da Y" />
+        </Link>
 
-                {
-                    [...pubData].reverse().map((pub) => {
+        <Link className="link perfil" to="/perfil">
+          <img src={userLogado.imgUser} alt="imagem do perfil do usuário" />
+          <span>Perfil</span>
+        </Link>
 
-                        const userQueFezAPublicacao = userData.find(user => user.id === pub.idUser);
+        <Link className="link preferencias" to="/preferencias">
+          <UserCircleGear size={72} weight="light" />
+          <span>Preferências</span>
+        </Link>
+      </aside>
 
-                        if (userQueFezAPublicacao) {
-                            return (
-                                <Publicacao 
-                                    nome={userQueFezAPublicacao.name} 
-                                    isLiked={pub.isLiked} 
-                                    texto={pub.text}
-                                    imgProfile={userQueFezAPublicacao.imgUser}
-                                    key={pub.idUser}
-                                />
-                            );
-                        }
+      <section className="container-pub">
+        <div className="nova-pub">
+          <img src={userLogado.imgUser} alt="imagem do perfil do usuário" />
 
-                        return null;
-                    })
-                }
-            </section>
-        </MainHome>
-    )
+          <div>
+            <textarea
+              value={textNewPub}
+              onChange={handleTextareaChange}
+              cols={30}
+              rows={4}
+              placeholder="Escrever nova publicação..."
+            ></textarea>
+            <button onClick={handlePublish} className={textNewPub === '' ? 'disabled' : ''}>Publicar</button>
+          </div>
+        </div>
+
+        {pubData.map((pub, index) => {
+          const userQueFezAPublicacao = userData.find(
+            (user) => user.id === pub.idUser
+          );
+
+          if (userQueFezAPublicacao) {
+            return (
+              <Publicacao
+                nome={userQueFezAPublicacao.name}
+                isLiked={pub.isLiked}
+                texto={pub.text}
+                imgProfile={userQueFezAPublicacao.imgUser}
+                key={index}
+              />
+            );
+          }
+
+          return null;
+        })}
+      </section>
+    </MainHome>
+  );
 }

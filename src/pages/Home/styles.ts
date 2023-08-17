@@ -87,6 +87,11 @@ export const MainHome = styled.main`
                     width: 150px;
                     align-self: flex-end;
                 }
+
+                .disabled{
+                    cursor: inherit;
+                    background-color: gray;
+                }
             }
         }
     }  

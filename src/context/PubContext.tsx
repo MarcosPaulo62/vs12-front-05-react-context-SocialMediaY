@@ -3,6 +3,7 @@ import { IChildren, IPub } from "../utils/interface";
 
 interface IPubContext{
     pubData: IPub[];
+    addPub: (idUser: string, text: string) => void;
 }
 
 export const PubContext = createContext({} as IPubContext);
@@ -59,8 +60,19 @@ export function PubProvider({ children }: IChildren){
         ]
     );    
 
+    function addPub(idUser: string, text: string){
+        const newPub: IPub = {
+            idUser: idUser,
+            text: text,
+            isLiked: false
+        }
+
+        setPubData(prevPubData => [newPub, ...prevPubData]);
+        console.log(pubData)
+    }
+
     return(
-        <PubContext.Provider value={{ pubData }}>
+        <PubContext.Provider value={{ pubData, addPub }}>
             {children}
         </PubContext.Provider>
     )

@@ -30,7 +30,7 @@ export function Perfil(){
 
             <section className='container-pub'>
                 {
-                    [...pubData].reverse().map((pub) => {
+                    pubData.map((pub) => {
                         if (pub.idUser == userLogado.id) {
                             return (
                                 <Publicacao 
