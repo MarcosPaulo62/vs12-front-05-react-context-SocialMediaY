@@ -7,7 +7,10 @@ import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import imgUser from '../../assets/AnaBanana.png'
 
-export function Home(){
+export function Home(){    
+    const { userData, userLogado } = useContext(UserContext);
+    console.log(userData)
+
     const usuarioLogado = {
         id: 1,
         imgUser: imgUser,
