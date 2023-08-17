@@ -9,6 +9,8 @@ export const MainHome = styled.main`
         background-color: ${(props) => props.theme.primaryColor};
         width: 500px;
         height: 80vh;
+        position: sticky;
+        top: 4.31rem;
         border-radius: 10px;
         box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.25);
         display: flex;
