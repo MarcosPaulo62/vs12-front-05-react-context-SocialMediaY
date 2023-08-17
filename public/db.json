@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "1",
-      "imgUser": "./src/assets/AnaBanana.png",
+      "imgUser": "https://diariodocomercio.com.br/wp-content/uploads/2022/08/mulher-na-politica-eleicoes.jpg",
       "name": "Ana Banana",
       "qtsPubs": 9,
       "followers": 700

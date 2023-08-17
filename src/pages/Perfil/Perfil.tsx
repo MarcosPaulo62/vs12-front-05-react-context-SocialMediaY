@@ -2,8 +2,14 @@ import logo from '../../assets/logo.png';
 import { MainPerfil } from './styles';
 import Publicacao from '../../components/Publicacao';
 import { Link } from 'react-router-dom';
+import { PubContext } from '../../context/PubContext';
+import { UserContext } from '../../context/UserContext';
+import { useContext } from 'react';
 
 export function Perfil(){
+    const { userLogado } = useContext(UserContext);
+    const { pubData } = useContext(PubContext);
+    
     return (
         <MainPerfil>
             <Link className='link' to='/'>
@@ -12,30 +18,33 @@ export function Perfil(){
 
             <section className='info-perfil'>
                 <span className='user'>
-                    <img src="https://diariodocomercio.com.br/wp-content/uploads/2022/08/mulher-na-politica-eleicoes.jpg" alt="imagem do perfil do usuário" />
-                    <span>Ana Banana</span>
+                    <img src={userLogado.imgUser} alt="imagem do perfil do usuário" />
+                    <span>{userLogado.name}</span>
                 </span>
 
                 <div className='info-user'>
-                    <p><span>9</span> publicações</p>
-                    <p><span>700</span> seguidores</p>
+                    <p><span>{userLogado.qtdPubs}</span> publicações</p>
+                    <p><span>{userLogado.followers}</span> seguidores</p>
                 </div>
             </section>
 
             <section className='container-pub'>
-                <Publicacao 
-                    nome='Ana Banana' 
-                    isLiked={true} 
-                    texto='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-                    imgProfile='https://diariodocomercio.com.br/wp-content/uploads/2022/08/mulher-na-politica-eleicoes.jpg'
-                />
-
-                <Publicacao 
-                    nome='Ana Banana' 
-                    isLiked={true} 
-                    texto='Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-                    imgProfile='https://diariodocomercio.com.br/wp-content/uploads/2022/08/mulher-na-politica-eleicoes.jpg'
-                />
+                {
+                    [...pubData].reverse().map((pub) => {
+                        if (pub.idUser == userLogado.id) {
+                            return (
+                                <Publicacao 
+                                    nome={userLogado.name} 
+                                    isLiked={pub.isLiked} 
+                                    texto={pub.text}
+                                    imgProfile={userLogado.imgUser}
+                                    key={pub.idUser}
+                                />
+                            );
+                        }
+                        return null;
+                    })
+                }
             </section>
         </MainPerfil>
     )

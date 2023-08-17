@@ -6,11 +6,12 @@ export interface IUser{
     id: string,
     imgUser: string,
     name: string,
-    qtsPubs: number,
+    qtdPubs: number,
     followers: number
 }
 
 export interface IPub{
     idUser: string,
-    text: string
+    text: string,
+    isLiked: Boolean
 }

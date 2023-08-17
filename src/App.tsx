@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Perfil } from "./pages/Perfil/Perfil";
 import { Preferencias } from "./pages/Preferencias/Preferencias";
 import { UserProvider } from './context/UserContext';
+import { PubProvider } from './context/PubContext';
 
 function App() {
   const [tema, setTema] = useState<string>('light');
@@ -14,14 +15,16 @@ function App() {
   return (
     <ThemeProvider theme={tema === 'light' ? lightTheme : darkTheme}>
       <UserProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/perfil" element={<Perfil />} />          
-            <Route path="/preferencias" element={<Preferencias onToggleTheme={(tema) => setTema(tema)} />} />          
-          </Routes>        
-        </BrowserRouter>
-        <GlobalStyle />
+        <PubProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/perfil" element={<Perfil />} />          
+              <Route path="/preferencias" element={<Preferencias onToggleTheme={(tema) => setTema(tema)} />} />          
+            </Routes>        
+          </BrowserRouter>
+          <GlobalStyle />
+        </PubProvider>
       </UserProvider>      
     </ThemeProvider>
   );
