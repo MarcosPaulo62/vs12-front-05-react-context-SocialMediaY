@@ -24,7 +24,7 @@ export const MainHome = styled.main`
             margin: auto;
         }
 
-        a{
+        .link{
             display: flex;
             align-items: center;
             gap: 1.5rem;
